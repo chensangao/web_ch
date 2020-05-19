@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>数组</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../layuiadmin/style/admin.css" media="all">
+</head>
+
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+
+                <div class="layui-card">
+                    <div class="layui-card-header">数组去重</div>
+                    <div class="layui-card-body layui-row layui-col-space10">
+                        <div class="layui-col-md12">
+                            <input type="text" id="deduplication_input" placeholder="请输入数组元素,用','分隔.例:1,2,'a','b'"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-col-md12">
+                            <button class="layui-btn" id='deduplication_btn1'>简单</button>
+                            <button class="layui-btn" id='deduplication_btn2'>对象键值</button>
+                            <button class="layui-btn" id='deduplication_btn3'>排序后相邻</button>
+                            <button class="layui-btn" id='deduplication_btn4'>数组下标</button>
+                            <button class="layui-btn" id='deduplication_btn5'>优化遍历</button>
+                        </div>
+                        <div class="layui-col-md12">
+                            <input type="text" id="deduplication_output" placeholder="去重后数组" autocomplete="off"
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-card layui-form" lay-filter="component-form-element">
+                    <div class="layui-card-header">下拉选择框</div>
+                    <div class="layui-card-body layui-row layui-col-space10">
+                        <div class="layui-col-md6">
+                            <select name="city" lay-verify="">
+                                <option value="">请选择一个城市</option>
+                                <option value="010">北京</option>
+                                <option value="021">上海</option>
+                                <option value="0571">杭州</option>
+                            </select>
+                        </div>
+                        <div class="layui-col-md6">
+                            <select name="city" lay-verify="">
+                                <option value="010">北京</option>
+                                <option value="021" disabled>上海（禁用效果）</option>
+                                <option value="0571" selected>杭州</option>
+                            </select>
+                        </div>
+                        <div class="layui-col-md6">
+                            <select name="quiz">
+                                <option value="">请选择</option>
+                                <optgroup label="城市记忆">
+                                    <option value="你工作的第一个城市">你工作的第一个城市？</option>
+                                </optgroup>
+                                <optgroup label="学生时代">
+                                    <option value="你的工号">你的工号？</option>
+                                    <option value="你最喜欢的老师">你最喜欢的老师？</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="layui-col-md6">
+                            <select name="city" lay-verify="required" lay-search>
+                                <option value="">带搜索的选择框</option>
+                                <option value="1">layer</option>
+                                <option value="2">form</option>
+                                <option value="3">layim</option>
+                                <option value="4">element</option>
+                                <option value="5">laytpl</option>
+                                <option value="6">upload</option>
+                                <option value="7">laydate</option>
+                                <option value="8">laypage</option>
+                                <option value="9">flow</option>
+                                <option value="10">util</option>
+                                <option value="11">code</option>
+                                <option value="12">tree</option>
+                                <option value="13">layedit</option>
+                                <option value="14">nav</option>
+                                <option value="15">tab</option>
+                                <option value="16">table</option>
+                                <option value="17">select</option>
+                                <option value="18">checkbox</option>
+                                <option value="19">switch</option>
+                                <option value="20">radio</option>
+                            </select>
+                        </div>
+                        <div class="layui-col-md12">
+                            <select name="city" lay-verify="">
+                                <option value="">请选择一个城市</option>
+                                <option value="010">北京</option>
+                                <option value="021">上海</option>
+                                <option value="0571">杭州</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card layui-form" lay-filter="component-form-element">
+                    <div class="layui-card-header">复选框</div>
+                    <div class="layui-card-body layui-row layui-col-space10">
+                        <div class="layui-col-md12">
+                            <input type="checkbox" name="" title="写作" checked>
+                            <input type="checkbox" name="" title="发呆">
+                            <input type="checkbox" name="" title="禁用" disabled>
+                        </div>
+                        <div class="layui-col-md12">
+                            <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
+                            <input type="checkbox" name="" title="发呆" lay-skin="primary">
+                            <input type="checkbox" name="" title="禁用" lay-skin="primary" disabled>
+                            <input type="checkbox" name="" lay-skin="primary">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card layui-form" lay-filter="component-form-element">
+                    <div class="layui-card-header">开关</div>
+                    <div class="layui-card-body layui-row layui-col-space10">
+                        <div class="layui-col-md12">
+                            <input type="checkbox" name="xxx" lay-skin="switch">
+                            <input type="checkbox" name="yyy" lay-skin="switch" lay-text="ON|OFF" checked>
+                            <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
+                            <input type="checkbox" name="aaa" lay-skin="switch" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card layui-form" lay-filter="component-form-element">
+                    <div class="layui-card-header">单选框</div>
+                    <div class="layui-card-body layui-row layui-col-space10">
+                        <div class="layui-col-md12">
+                            <input type="radio" name="sex" value="nan" title="男">
+                            <input type="radio" name="sex" value="nv" title="女" checked>
+                            <input type="radio" name="sex" value="" title="中性" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">文本域</div>
+                    <div class="layui-card-body layui-row layui-col-space10">
+                        <div class="layui-col-md12">
+                            <textarea name="" placeholder="请输入" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">响应式组合</div>
+                    <div class="layui-card-body">
+                        <form class="layui-form" action="" lay-filter="component-form-element">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">员工姓名：</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="fullname" lay-verify="required" placeholder=""
+                                            autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">技术工种：</label>
+                                    <div class="layui-input-block">
+                                        <select name="type" lay-verify="required" lay-filter="aihao">
+                                            <option value=""></option>
+                                            <option value="0">前端工程师</option>
+                                            <option value="1">Node.js工程师</option>
+                                            <option value="2">PHP工程师</option>
+                                            <option value="3">Java工程师</option>
+                                            <option value="4">运维</option>
+                                            <option value="4">视觉设计师</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">兴趣爱好：</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="interest[write]" title="写作">
+                                    <input type="checkbox" name="interest[read]" title="阅读">
+                                    <input type="checkbox" name="interest[code]" title="代码" checked>
+                                    <input type="checkbox" name="interest[dreaming]" title="做梦">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">是否婚姻：</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="marriage" lay-skin="switch" lay-text="是|否">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">所属职称：</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="role" value="" title="经理">
+                                    <input type="radio" name="role" value="" title="主管">
+                                    <input type="radio" name="role" value="" title="码农" checked>
+                                    <input type="radio" name="role" value="" title="端水">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">其它信息：</label>
+                                <div class="layui-input-block">
+                                    <textarea name="other" placeholder="" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label"> </label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="agreement" title="同意" lay-skin="primary" checked>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit
+                                        lay-filter="component-form-element">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../../../layuiadmin/layui/layui.js"></script>
+    <script src="deduplication.js"></script>
+    <script>
+        layui.config({
+            base: '../../../layuiadmin/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use(['index', 'form'], function () {
+            var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , form = layui.form;
+
+            //数组去重
+            var title, input, arr;
+            title = `最简单数组去重法
+新建一新数组，遍历传入数组，值不在新数组就push进该新数组中
+IE8以下不支持数组的indexOf方法`
+            $('#deduplication_btn1').click(function () {
+                input = $('#deduplication_input').val();
+                arr = input.split(',');
+                $('#deduplication_output').val(uniq1(arr));
+            }).attr('title', title);
+
+            title = `速度最快， 占空间最多（空间换时间）
+该方法执行的速度比其他任何方法都快， 就是占用的内存大一些。
+现思路：新建一js对象以及新数组，遍历传入数组时，判断值是否为js对象的键，
+不是的话给对象新增该键并放入新数组。
+注意点：判断是否为js对象键时，会自动对传入的键执行“toString()”，
+不同的键可能会被误认为一样，例如n[val]-- n[1]、n["1"]；
+解决上述问题还是得调用“indexOf”。`
+            $('#deduplication_btn2').click(function () {
+                input = $('#deduplication_input').val();
+                arr = input.split(',');
+                $('#deduplication_output').val(uniq2(arr));
+            }).attr('title', title);
+
+            title = `给传入数组排序，排序后相同值相邻，
+然后遍历时,新数组只加入不与前一值重复的值。
+会打乱原来数组的顺序`
+            $('#deduplication_btn3').click(function () {
+                input = $('#deduplication_input').val();
+                arr = input.split(',');
+                $('#deduplication_output').val(uniq3(arr));
+            }).attr('title', title);
+
+            title = `还是得调用“indexOf”性能跟方法1差不多，
+实现思路：如果当前数组的第i项在当前数组中第一次出现的位置不是i，
+那么表示第i项是重复的，忽略掉。否则存入结果数组。`
+            $('#deduplication_btn4').click(function () {
+                input = $('#deduplication_input').val();
+                arr = input.split(',');
+                $('#deduplication_output').val(uniq4(arr));
+            }).attr('title', title);
+
+            title = `推荐的方法
+实现思路：获取没重复的最右一值放入新数组。
+（检测到有重复值时终止当前循环同时进入顶层循环的下一轮判断）`
+            $('#deduplication_btn5').click(function () {
+                input = $('#deduplication_input').val();
+                arr = input.split(',');
+                $('#deduplication_output').val(uniq5(arr));
+            }).attr('title', title);
+
+        });
+    </script>
+</body>
+
+</html>
