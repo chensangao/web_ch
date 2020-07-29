@@ -1,0 +1,35 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-07-28 14:30:49
+ * @LastEditTime: 2020-07-28 14:32:44
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        浏览器缓存分为两种，一种是强缓存，一种是协商缓存。
+        强缓存:
+            就是在规定的时间内，不询问服务器强制使用浏览器缓存，
+            时间的设置是根据响应头的expires字段和cache-control字段，
+            expires的值是一个绝对时间，在这个时间之前，浏览器都会使用强缓存，
+            缺点:就是如果客户端和服务端时间不同步，会出现是用不了缓存的情况，
+            弥补:cache-control这个字段是http1.1出的，它的值是一个相对时间，在这个相对时间之内都是用强缓存，
+                这个弥补了expires的缺点，不管客户端时间正不正确，都能在有效时间内使用强缓存
+        协商缓存:
+            浏览器会带着if-Modified-Since字段询问服务器是否使用缓存，
+            服务器根据传来的if-Modified-Since时间来判断是否需要使用缓存。
+        */
+    </script>
+</body>
+
+</html>

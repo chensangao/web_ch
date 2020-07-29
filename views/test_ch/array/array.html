@@ -31,6 +31,7 @@
                             <button class="layui-btn" id='deduplication_btn3'>排序后相邻</button>
                             <button class="layui-btn" id='deduplication_btn4'>数组下标</button>
                             <button class="layui-btn" id='deduplication_btn5'>优化遍历</button>
+                            <button class="layui-btn" id='deduplication_btn6'>转为set</button>
                         </div>
                         <div class="layui-col-md12">
                             <input type="text" id="deduplication_output" placeholder="去重后数组" autocomplete="off"
@@ -284,13 +285,11 @@ IE8以下不支持数组的indexOf方法`
                 $('#deduplication_output').val(uniq4(arr));
             }).attr('title', title);
 
-            title = `推荐的方法
-实现思路：获取没重复的最右一值放入新数组。
-（检测到有重复值时终止当前循环同时进入顶层循环的下一轮判断）`
-            $('#deduplication_btn5').click(function () {
+            title = `利用ES6新数据结构set 但是存在伪数组问题）`
+            $('#deduplication_btn6').click(function () {
                 input = $('#deduplication_input').val();
                 arr = input.split(',');
-                $('#deduplication_output').val(uniq5(arr));
+                $('#deduplication_output').val(uniq6(arr));
             }).attr('title', title);
 
         });

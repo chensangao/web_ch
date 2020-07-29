@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: chenhao
  * @Date: 2020-05-19 12:13:31
- * @LastEditTime: 2020-05-19 15:16:31
+ * @LastEditTime: 2020-07-27 13:38:57
  * @LastEditors: chenhao
  */
 
@@ -16,11 +16,11 @@ function uniq1(array) {
     for (var i = 0; i < array.length; i++) {
         if (temp.indexOf(array[i]) == -1) {
             temp.push(array[i]);
+
         }
     }
     return temp;
 }
-
 // var aa = [1, 2, 2, 4, 9, 6, 7, 5, 2, 3, 5, 6, 5];
 // console.log(uniq1(aa));//[ 1, 2, 4, 9, 6, 7, 5, 3 ] 
 
@@ -111,6 +111,9 @@ function uniq5(array) {
     }
     return temp;
 }
+
+//利用ES6新数据结构set 但是存在伪数组问题
+let uniq6 = (array) => [...new Set(array)];
 
 // var aa = [1, 2, 2, 3, 5, 3, 6, 5];
 // console.log(uniq5(aa));

@@ -1,0 +1,71 @@
+<!--
+ * @Description: 防抖和节流
+ * @Author: chenhao
+ * @Date: 2020-07-28 12:13:08
+ * @LastEditTime: 2020-07-28 12:37:23
+ * @LastEditors: chenhao
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖和节流</title>
+    <style>
+        html,
+        body {
+            height: 500%;
+        }
+    </style>
+</head>
+
+<body>
+    <button id='btn'>防抖</button>
+    <script>
+        /**
+         * @description: 节流:在规定时间内,只有第一次执行生效
+         * @param : fn 被节流函数
+         * @param : delay 设定周期
+         */
+        function throttle(fn, delay) {
+            var lastTime = 0;//记录上次执行时间 初始0
+
+            return () => {//闭包同步lastTime 防止初始化
+                var nowTime = Date.now()
+                if (nowTime - lastTime >= delay) {
+                    fn.call(this);//执行fn 修正this指向
+                    lastTime = nowTime;//同步lastTime
+                }
+            }
+        }
+
+        document.onscroll = throttle(() => {
+            console.log('scroll触发' + Date.now());
+        }, 2000);
+
+
+        /**
+         * @description: 防抖:在规定时间内,只有最后一次一次执行生效
+         * @param : fn 被防抖函数
+         * @param : delay 设定周期 
+         */
+        function debounce(fn, delay) {
+            var timer = null;//延时器
+
+            return () => {
+                clearTimeout(timer);//清除延时器
+                timer = setTimeout(() => fn.apply(this), delay);//重置延时器
+            }
+        }
+
+        document.getElementById('btn').onclick = debounce(() => {
+            console.log('点击事件触发' + Date.now());
+        }, 1000);
+
+
+    </script>
+</body>
+
+</html>
