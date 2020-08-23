@@ -1,0 +1,57 @@
+<!--
+ * @Description: 原生js实现ajax
+ * @Author: chenhao
+ * @Date: 2020-07-27 13:50:45
+ * @LastEditTime: 2020-08-21 21:29:12
+ * @LastEditors: chenhao
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>原生js实现ajax</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+
+<body>
+    <!-- ajax -->
+    <script src="ajax.js"></script>
+    <script>
+        //基本的使用实例
+        Ajax({
+            url: "https://ku.qingnian8.com/school/list.php",
+            dataType: 'json',
+            success: function (rdata) {
+                console.log('成功');
+                console.log(rdata);
+            },
+            error: function (rdata) {
+                console.log('失败');
+                console.log(rdata);
+            }
+        });
+
+        Ajax({
+            url: "https://ku.qingnian8.com/school/list.php",
+            type: 'post', data: { a: 1, b: 2 },
+            dataType: 'json',
+            success: function (rdata) {
+                console.log('成功');
+                console.log(rdata);
+            },
+            error: function (rdata) {
+                console.log('失败');
+                console.log(rdata);
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

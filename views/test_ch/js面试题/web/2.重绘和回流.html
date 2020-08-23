@@ -1,0 +1,80 @@
+<!--
+ * @Description: 重绘和回流
+ * @Author: chenhao
+ * @Date: 2020-08-23 17:28:35
+ * @LastEditTime: 2020-08-23 17:32:30
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重绘和回流</title>
+</head>
+
+<body>
+    <script>
+        /*
+        浏览器呈现网页的处理流程图：
+
+        具体处理步骤：
+
+        浏览器把获取到的HTML代码解析成一棵DOM树，
+        HTML中的每个标签（tag）都是DOM树中的一个节点，根节点就是我们常用的document对象。
+        DOM树里包含了HTML所有标签，包括display：none隐藏，还有用JS动态添加的元素等；
+
+        浏览器把所有样式（用户定义的css和用户代理）解析成样式结构体，
+        在解析过程中会去掉浏览器不能识别的样式，比如IE会去掉-moz开头的样式，而Firefox会去掉_开头的样式；
+
+        DOM树和样式结构体组合后构建render tree（渲染树），render tree类似于DOM树，但区别很大，
+        render tree 能识别样式，render tree的每一个节点都有自己的样式，
+        而且render tree中不包含隐藏的节点（比如display：none的节点，还有head节点），
+        因为这些节点不会用于呈现，而且不会影响呈现。
+
+        注意：visibility：hidden隐藏的元素还是会包含到render tree中，
+        因为visibility：hidden会影响布局（layout），会占有空间。
+        根据css2的标准，render tree中的每个节点都称为Box（Box demensions）,
+        理解页面元素为一个具有填充，边距，边框和位置的盒子。
+
+        一旦render tree构建完成后，浏览器就可以根据render tree来绘制页面了。
+        */
+
+        /*
+        重绘
+        重绘是一个元素外观的改变所触发的浏览器行为，例如改变visibility，outline，背景色属性。
+        浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。
+        */
+
+        /*
+        回流
+        回流是更明显的一种改变，可以理解为render tree需要重新计算。
+        每个页面至少需要一次回流，就是在页面加载的时候。
+        注意：回流必将引起重绘，但重绘不一定引起回流。
+        */
+
+        /*
+        触发回流
+        调整窗口大小（Resizing the windown）;
+
+        改变字体（changing the font）;
+
+        增加或移除样式表（adding or removing a stylesheet）；
+
+        内容变化，比如用户在input输入框中输入文字（content changes ,such as a user typing text in an input box）；
+
+        激活css伪类，比如：hover（IE中为兄弟节点伪类的激活）（activation of css pseudo classes such as :hover (in IE the activation of the pseduo class of a silibing)）;
+
+        操作class属性（manipulating the class attribute）；
+
+        脚本操作DOM（a script manipulating the DOM）；
+
+        计算offsetWidth和offsetHeight属性（calculating offsetWidth and offsetHeight）
+
+        设置style属性的值（setting a property of the style attribute）。
+        */
+    </script>
+</body>
+
+</html>
