@@ -1,0 +1,68 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-08-23 10:31:03
+ * @LastEditTime: 2020-08-23 12:00:20
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃的小Q(二分查找)</title>
+</head>
+
+<body>
+    <script>
+        /*
+        小Q的父母要出差N天，走之前给小Q留下了M块巧克力。
+        小Q决定每天吃的巧克力数量不少于前一天吃的一半，但是他又不想在父母回来之前的某一天没有巧克力吃，
+        请问他第一天最多能吃多少块巧克力
+
+        输入描述:
+        每个输入包含一个测试用例。
+        每个测试用例的第一行包含两个正整数，表示父母出差的天数N(N<=50000)和巧克力的数量M(N<=M<=100000)。
+
+        输出描述:
+        输出一个数表示小Q第一天最多能吃多少块巧克力。
+
+        输入例子1:
+        3 7
+
+        输出例子1:
+        4
+        */
+
+        var [n, m] = prompt().split(' ').map(x => parseInt(x));
+
+        function getSum(x) {//计算如果第一天x个,n天一共吃多少个
+            var sum = 0;
+            for (let i = 0; i < n; i++) {
+                sum += x;
+                x = Math.ceil(x / 2);//向上取整
+            }
+            return sum;
+        }
+
+        // 二分查找
+        function fun() {
+            var start = 1, end = m;
+            while (start < end) {
+                var mid = Math.ceil((start + end) / 2);
+                var sum = getSum(mid);
+                if (sum == m) return mid;
+                else if (sum < m) { start = mid; }
+                else { end = mid - 1; }
+            }
+            return end;
+        }
+
+        console.log(fun());
+
+    </script>
+
+</body>
+
+</html>

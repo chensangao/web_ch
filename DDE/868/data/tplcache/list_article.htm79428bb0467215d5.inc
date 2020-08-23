@@ -1,0 +1,44 @@
+<?php
+$z[0]=Array("field","",384,403);
+$z[0][4]=array();
+$z[0][4]['name']="title";
+$z[1]=Array("global","",404,430);
+$z[1][4]=array();
+$z[1][4]['name']="cfg_webname";
+$z[2]=Array("field","",471,500);
+$z[2][4]=array();
+$z[2][4]['name']="keywords";
+$z[3]=Array("field","",540,598);
+$z[3][4]=array();
+$z[3][4]['name']="description";
+$z[3][4]['function']="html2text(@me)";
+$z[4]=Array("include","",1022,1057);
+$z[4][4]=array();
+$z[4][4]['filename']="head.htm";
+$z[5]=Array("field","",1346,1404);
+$z[5][4]=array();
+$z[5][4]['name']="typeid";
+$z[5][4]['function']="GetTopTypename(@me)";
+$z[6]=Array("field","",1443,1504);
+$z[6][4]=array();
+$z[6][4]['name']="typeid";
+$z[6][4]['function']="GetTopDescription(@me)";
+$z[7]=Array("include","",1542,1580);
+$z[7][4]=array();
+$z[7][4]['filename']="wapfoot.htm";
+$z[8]=Array("channel","\r\n      <li>\r\n        <div><a href=\"[field:typeurl/]\">[field:typename/]</a></div>\r\n        <i></i> </li>\r\n      ",1716,1994);
+$z[8][4]=array();
+$z[8][4]['type']="son";
+$z[8][4]['currentstyle']="<li class='cur'> <div><a href='~typelink~'>~typename~</a></div> <i></i></li>";
+$z[9]=Array("list","\r\n        <div class=\"news-one\">\r\n          <div class=\"news-one-date\">\r\n            <p class=\"day\">[field:pubdate function=\"MyDate('d',@me)\"/]</p>\r\n            <p class=\"month\">[field:pubdate function=\"MyDate('m',@me)\"/]</p>\r\n            <p class=\"year\">[field:pubdate function=\"MyDate('Y',@me)\"/]</p>\r\n          </div>\r\n          <div class=\"news-one-desc\">\r\n            <div class=\"news-one-words\">\r\n              <h3><a href=\"[field:arcurl/]\">[field:title/]</a></h3>\r\n              <p class=\"words\">[field:description function=\"cn_substr(@me,200)\"/]...</p>\r\n            </div>\r\n            <a href=\"[field:arcurl/]\" class=\"link\"><span class=\"more\">Read&More</span><img src=\"/skin/images/news-arrow.png\"></a> </div>\r\n        </div>\r\n        ",2177,2958);
+$z[9][4]=array();
+$z[9][4]['pagesize']="5";
+$z[10]=Array("pagelist","",3023,3089);
+$z[10][4]=array();
+$z[10][4]['listitem']="index,end,pre,next,pageno";
+$z[10][4]['listsize']="2";
+$z[11]=Array("include","",3212,3249);
+$z[11][4]=array();
+$z[11][4]['filename']="footer.htm";
+
+?>

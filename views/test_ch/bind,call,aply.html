@@ -1,0 +1,48 @@
+<!--
+ * @Description: bind,call,aply
+ * @Author: chenhao
+ * @Date: 2020-07-28 13:45:11
+ * @LastEditTime: 2020-08-17 10:54:41
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bind,call,aply</title>
+</head>
+
+<body>
+    <script>
+        var name = "小明", age = "17"
+        var obj = {
+            name: "安妮",
+            objAge: this.age,
+            fun: function () {
+                console.log(this.name + "今年" + this.age)
+            }
+        }
+        console.log(obj.objAge) // 17 
+        obj.fun() // 安妮今年undefined
+        var name = "小明", age = "17"
+        var obj = {
+            name: "安妮",
+            objAge: this.age,
+            fun: function (like, dislike) {
+                console.log(this.name + "今年" + this.age ，"喜欢吃" + like + "不喜欢吃" + dislike)
+            }
+        }
+        var a = { name: "Jay", age: 23 }
+        obj.fun.call(a, "苹果", "香蕉") // Jay今年23 喜欢吃苹果不喜欢吃香蕉 
+        obj.fun.apply(a, ["苹果", "香蕉"]) // Jay今年23 喜欢吃苹果不喜欢吃香蕉 
+        obj.fun.bind(a, "苹果", "香蕉")() // Jay今年23 喜欢吃苹果不喜欢吃香蕉
+
+        // 首先call，apply，bind第一个参数都是this指向的对象，call和apply如果第一个参数指向null或undefined时，那么this会指向windows对象。
+
+        // call，apply，bind的执行方式如上例所示。call，apply都是改变上下文中的this，并且是立即执行的。bind方法可以让对应的函数想什么时候调用就什么时候调用。
+    </script>
+</body>
+
+</html>

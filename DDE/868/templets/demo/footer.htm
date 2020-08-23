@@ -1,0 +1,45 @@
+<footer>
+  <div class="m-totop">返回顶部</div>
+  <div class="container">
+    <div class="footer-l">
+      <ul>
+        {dede:channelartlist typeid='top' row='6'}
+        <li>
+          <dl>
+            <dt> <a href="{dede:field name='typeurl'/}">{dede:field name='typename'/}</a> <i class="f-arrow"><img src="/skin/images/f-arrow.png"></i> </dt>
+            <div class="footer-sub-menu"> {dede:channel type='son' noself='yes'}
+              <dd><a href="[field:typeurl/]">[field:typename/]</a></dd>
+              {/dede:channel} </div>
+          </dl>
+        </li>
+        {/dede:channelartlist}
+      </ul>
+    </div>
+    <div class="footer-r">
+      <div class="f-share"> <a class="f-share-one" href="javascript:;"> <img src="/skin/images/f-share-one-1.png">
+        <div class="fs-one-qrcode"><img src="/skin/images/ew1.jpg" width="150"></div>
+        </a> <a class="f-share-one" href="javascript:;"> <img src="/skin/images/f-share-one-2.png" alt="">
+        <div class="fs-one-qrcode"><img src="/skin/images/ew2.jpg" alt="" width="150"></div>
+        </a> <a class="f-share-one" href="http://wpa.qq.com/msgrd?v=3&amp;uin={dede:global.cfg_qq/}&amp;site=qq&amp;menu=yes" target="_blank"><img src="/skin/images/f-share-one-3.png" alt=""></a> </div>
+      <div class="f-belongs">
+        <div class="f-belongs-one">Tel-A：{dede:global.cfg_tel/}</div>
+        <div class="f-belongs-one">Tel-B：{dede:global.cfg_phone/}</div>
+        <div class="f-belongs-one">E-Mail：{dede:global.cfg_email/}</div>
+        <div class="f-belongs-one">{dede:global.cfg_add/}</div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    <div class="container">
+      <div class="copyright-l">
+        <h2>友情链接：</h2>
+        <ul>
+          {dede:flink titlelen='20' row='20' type='text'}
+          <li> [field:link/] </li>
+          {/dede:flink}
+        </ul>
+      </div>
+      <div class="copyright-r">{dede:global.cfg_powerby/}&nbsp;&nbsp;&nbsp;<span class="cip-r">备案号：<a href="http://beian.miit.gov.cn" target="_blank" rel="nofollow">{dede:global.cfg_beian/}</a></span>&nbsp;&nbsp;&nbsp;<span class="cip-r"><a href="/sitemap.xml" target="_blank">XML地图</a></span>&nbsp;&nbsp;&nbsp;<span class="cip-r"><a href="http://www.adminbuy.cn" target="_blank">网站模板</a></span></div>
+    </div>
+  </div>
+</footer>

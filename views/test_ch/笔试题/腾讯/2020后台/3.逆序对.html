@@ -1,0 +1,119 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-08-21 12:27:36
+ * @LastEditTime: 2020-08-21 13:50:09
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逆序对</title>
+</head>
+
+<body>
+    <script>
+        /*
+        链接：https://www.nowcoder.com/questionTerminal/8fe007e54fc04b5e82089aaa71ba3553
+        来源：牛客网
+
+        作为程序员的小Q，他的数列和其他人的不太一样，他有2^n个数。
+        老板问了小Q一共m次，每次给出一个整数q_i (1 <= i <= m)
+        要求小Q把这些数每2^{q_i}分为一组，然后把每组进行翻转，
+        小Q想知道每次操作后整个序列中的逆序对个数是多少呢？
+
+        例如:
+        对于序列1 3 4 2，逆序对有(4, 2),(3, 2),总数量为2。
+        翻转之后为2 4 3 1，逆序对有(2, 1),(4, 3), (4, 1), (3, 1),总数量为4。
+
+        输入描述:
+        第一行一个数n(0≤n≤20)
+        第二行2^n个数，表示初始的序列(1≤初始序列≤10^9)
+        第三行一个数m(1≤m≤10^6)
+        第四行m个数表示q_i(0≤q_i≤n)
+
+        输出描述:
+        m行每行一个数表示答案。
+
+        示例1
+        输入
+        2
+        2 1 4 3
+        4
+        1 2 0 2
+
+        输出
+        0
+        6
+        6
+        0
+
+        说明
+        初始序列2 1 4 3
+        2^{q_1} = 2 ->
+        第一次：1 2 3 4 -> 逆序对数为0
+        2^{q_2} = 4 ->
+        第二次：4 3 2 1 -> 逆序对数为6
+        2^{q_3} = 1 ->
+        第三次：4 3 2 1 -> 逆序对数为6
+        2^{q_4} = 4 ->
+        第四次：1 2 3 4 -> 逆序对数为0
+        */
+
+
+        var n = 2;
+        var dataArr = '2 1 4 3'.split(' ').map(x => parseInt(x));
+        var m = 4;
+        var qArr = '1 2 0 2'.split(' ').map(x => parseInt(x));
+
+        var nqArr = qArr.map(x => Math.pow(n, x));
+
+        let finalDataArr = [];
+        let niArr = [];
+        for (let i = 0; i < nqArr.length; i++) {
+            dataArr = sliceArr(dataArr, nqArr[i]);
+
+            let reDataArr = []
+            for (let j = 0; j < dataArr.length; j++) {
+                reDataArr.push(...reverse(dataArr[j]));
+            }
+            finalDataArr.push(reDataArr);
+            dataArr = reDataArr;
+            niArr.push(ni(reDataArr));
+        }
+        console.log(niArr);
+
+        function sliceArr(arr, count) {//数组按长度分割
+            let result = [];
+            for (let i = 0; i < arr.length; i += count) {
+                result.push(arr.slice(i, i + count));
+            }
+            return result;
+        }
+
+        function reverse(arr) {//反转数组
+            for (let i = 0; i < arr.length / 2; i++) {
+                var temp = arr[i];
+                arr[i] = arr[arr.length - 1 - i];
+                arr[arr.length - 1 - i] = temp;
+            }
+            return arr;
+        }
+
+        function ni(arr) {//计算逆序对数
+            let count = 0;
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = i; j < arr.length; j++) {
+                    if (arr[i] > arr[j]) count++
+                }
+            }
+            return count;
+        }
+
+    </script>
+</body>
+
+</html>

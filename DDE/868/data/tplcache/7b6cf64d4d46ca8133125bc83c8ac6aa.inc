@@ -1,0 +1,2 @@
+<div class="product_txt1 wow fadeInUp4" data-wow-duration="1.2s" data-wow-delay=".1s">[field:typename/]<span class="br-m"></span></div>
+    <div class="product_txt2 wow fadeInUp5" data-wow-duration="1.2s" data-wow-delay=".35s">[field:description/]</div>

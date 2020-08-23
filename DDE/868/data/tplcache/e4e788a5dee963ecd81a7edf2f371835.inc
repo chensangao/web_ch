@@ -1,0 +1,2 @@
+<div class="menu_tit1 wow fadeInUp4" data-wow-duration="1.2s" data-wow-delay=".1s">[field:typename/]</div>
+      <div class="menu_tit2 wow fadeInUp5" data-wow-duration="1.2s" data-wow-delay=".35s">[field:description/]</div>

@@ -1,0 +1,27 @@
+﻿.floatbox { display: none; padding: 20px 5px 20px 20px; background: #ffffff; z-index: 2000; position: fixed !important; position: absolute; }
+.floatbox .close { width: 40px; height: 40px; line-height: 40px; font-weight: 700; text-align: center; display: inline-block; font-size: 40px; font-family: Arial, Helvetica, sans-serif; color: #999; position: absolute; right: 20px; top: 15px; }
+.floatbox .close:hover { color: #ff6600; text-decoration: none; }
+.floatbox .fview { padding-right: 20px; height: 100%; overflow: auto; padding-top: 10px; }
+.floatbox .fview .title { padding: 0 0 10px; font-size: 18px; color: #008040; cursor: move; }
+.floatbox .fview .tbox { padding: 10px; }
+#dvShelter { width: 100%; filter: Alpha(Opacity=50); -moz-opacity: 0.5; opacity: 0.5; z-index: 1001; background-color: #000000; position: fixed !important; top: 0px; left: 0px; right: 0px; bottom: 0px; position: absolute; }
+
+._upfile span { color: blue; margin-right: 10px; white-space: nowrap; display: inline-block; }
+._upfile span a { display: inline-block; padding: 3px; margin-right: 4px; background: red; color: #fff; font-size: 12px; }
+#upShelter { width: 100%; filter: Alpha(Opacity=50); -moz-opacity: 0.5; opacity: 0.5; z-index: 2001; background-color: #000000; position: fixed !important; top: 0px; left: 0px; right: 0px; bottom: 0px; position: absolute; }
+#upMsg { display: none; padding: 20px; font-size: 14px; line-height: 1.5em; background: #ffffff; z-index: 2002; position: fixed !important; position: absolute; border: 1px solid #333; }
+#upMsg input { float: right; margin: 20px 0 0; border: 0; padding: 5px 20px; background: #ff4400; color: #fff; }
+
+._picView { left: 0; right: 0; top: 0; bottom: 0; padding: 20px 50px; background: #000; z-index: 2000; position: fixed !important; position: absolute; border: 5px solid #000; overflow: hidden; }
+._picView .close { z-index: 2; background: url(../images/close_icon.png) no-repeat center center; width: 43px; height: 43px; text-align: center; display: inline-block; color: #ffffff; position: absolute; right: 10px; top: 10px; opacity: 1;}
+._picView .close:hover { background: url(../images/chover_icon.png) no-repeat center center; opacity: 1;}
+
+._picView .prev { z-index: 1; width: 61px; height: 61px; position: absolute; top: 50%; left: 10px; margin-top: -30px; background: url(../images/arrow_left.png) no-repeat center center; }
+._picView .prev:hover { background: url(../images/lhover_icon.png) no-repeat center center; }
+
+
+._picView .next { z-index: 1; width: 61px; height: 61px; position: absolute; top: 50%; right: 10px; margin-top: -30px; background: url(../images/arrow_right.png) no-repeat center center; }
+._picView .next:hover { background: url(../images/rhover_icon.png) no-repeat center center; }
+._picView .pbox { display: none; position: absolute; margin: 0; cursor: move; }
+._picView .load { z-index: 2; width: 40px; height: 40px; position: absolute; top: 50%; left: 50%; margin-left: -20px; margin-top: -20px; display: inline-block; }
+

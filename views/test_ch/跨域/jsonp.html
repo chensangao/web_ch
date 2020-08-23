@@ -1,0 +1,58 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-07-27 13:50:45
+ * @LastEditTime: 2020-08-21 21:32:22
+ * @LastEditors: chenhao
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>jsonp</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+
+<body>
+    <!-- jsonp 安全性低(过于开放) -->
+    <input type="text" id='txt1'>
+    <ul id='ul1'></ul>
+    <script>
+        // var url = `https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&wd=js&cb=show`;
+        function show(json) {
+            // console.log(json);
+            let oUl = document.getElementById('ul1')
+            oUl.innerHTML = '';
+            if (json.g) {
+                json.g.forEach(element => {
+                    let oLi = document.createElement('li');
+                    oLi.innerHTML = element.q;
+                    oUl.append(oLi)
+                });
+            }
+        }
+
+        window.onload = function () {
+            let oTxt = document.getElementById('txt1');
+
+            oTxt.onkeyup = function () {
+                if (event.keyCode == '13') {
+                    let oS = document.createElement('script');
+                    oS.src = `https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&wd=${encodeURIComponent(oTxt.value)}&cb=show`
+                    document.head.appendChild(oS);
+                }
+            }
+        }
+
+    </script>
+    <!-- <script src='bd_data.js' charset='utf-8'></script> -->
+    <!-- <script src='https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&wd=js&cb=show' charset='utf-8'></script> -->
+
+</body>
+
+</html>

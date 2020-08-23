@@ -1,0 +1,1 @@
+<div class="index-news-one"><a class="inews-one-l" href="[field:arcurl/]">[field:title/]</a> <span class="inews-one-r">[[field:pubdate function="MyDate('Y-m-d',@me)"/]]</span> </div>

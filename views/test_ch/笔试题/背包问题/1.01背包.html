@@ -1,0 +1,80 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-08-23 13:00:26
+ * @LastEditTime: 2020-08-23 14:20:39
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01背包</title>
+</head>
+
+<body>
+    <script>
+        /*
+        有n件物品和一个容量为m的背包。第i件物品的费用是c[i]，价值是w[i]。
+        求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。
+        */
+
+        /*
+        dp[i][j]表示只看前i个物品,总体积为j的情况下,总价值最大是多少
+        result=max{f[n][0~v]}
+
+        dp[i][j]:
+        1.不选第i个物品,dp[i][j]=dp[i-1][j]
+        2.选第i个物品,dp[i][j]=dp[i-1][j-c[i]]+w[i]
+        dp[i][j]=max{1.,2.}
+
+        f[0][0]=0;//初始化
+        */
+
+        var [n, m] = prompt().split(' ').map(x => parseInt(x));
+        var c = [], w = [];
+        for (let i = 1; i <= n; i++) {
+            [c[i], w[i]] = prompt().split(' ').map(x => parseInt(x));
+        }
+
+    </script>
+
+    <script about='二维暴力解法'>
+        // var dp = new Array(); //先声明一维 
+        // for (var i = 0; i <= n; i++) {  //一维长度为2
+        //     dp[i] = new Array(); //再声明二维 
+        //     for (var j = 0; j <= m; j++) {  //二维长度为3
+        //         dp[i][j] = 0;  // 赋值，每个数组元素的值为i+j
+        //     }
+        // }
+
+        // for (let i = 1; i <= n; i++) {
+        //     for (let j = 0; j <= m; j++) {
+        //         dp[i][j] = dp[i - 1][j];
+        //         if (j >= c[i])
+        //             dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - c[i]] + w[i]);
+        //     }
+        // }
+
+        // console.log(dp[n][m]);
+    </script>
+
+    <script about='一维'>
+        var dp2 = new Array();
+        for (var i = 0; i <= m; i++) {
+            dp2[i] = 0;
+        }
+
+        for (let i = 1; i <= n; i++) {
+            for (let j = m; j >= c[i]; j--) {
+                dp2[j] = Math.max(dp2[j], dp2[j - c[i]] + w[i]);
+            }
+        }
+
+        console.log(dp2[m]);
+    </script>
+</body>
+
+</html>

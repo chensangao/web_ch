@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户喜好</title>
+</head>
+
+<body>
+    <script>
+        /*
+        为了不断优化推荐效果，今日头条每天要存储和处理海量数据。
+        假设有这样一种场景：
+        我们对用户按照它们的注册时间先后来标号，对于一类文章，每个用户都有不同的喜好值，
+        我们会想知道某一段时间内注册的用户（标号相连的一批用户）中，有多少用户对这类文章喜好值为k。
+        因为一些特殊的原因，不会出现一个查询的用户区间完全覆盖另一个查询的用户区间(不存在L1<=L2<=R2<=R1)。
+
+        输入描述:
+        输入：
+        第1行为n代表用户的个数
+        第2行为n个整数，第i个代表用户标号为i的用户对某类文章的喜好度
+        第3行为一个正整数q代表查询的组数
+        第4行到第（3+q）行，每行包含3个整数l,r,k代表一组查询，即标号为l<=i<=r的用户中对这类文章喜好值为k的用户的个数。
+        数据范围n <= 300000,q<=300000 k是整型
+
+        输出描述:
+        输出：一共q行，每行一个整数代表喜好值为k的用户的个数
+
+        输入例子1:
+        5
+        1 2 3 3 5
+        3
+        1 2 1
+        2 4 5
+        3 5 3
+
+        输出例子1:
+        1
+        0
+        2
+
+        例子说明1:
+        样例解释:
+        有5个用户，喜好值为分别为1、2、3、3、5，
+        第一组询问对于标号[1,2]的用户喜好值为1的用户的个数是1
+        第二组询问对于标号[2,4]的用户喜好值为5的用户的个数是0
+        第三组询问对于标号[3,5]的用户喜好值为3的用户的个数是2
+        */
+        var n = 5;
+        var likeArr = '1 2 3 3 5'.split(' ').map(x => parseInt(x));
+        var q = 3;
+        var qArr = [[1, 2, 1], [2, 4, 5], [3, 5, 3]];
+
+        //遍历喜好度数组，将相同喜好度的下标添加进一个新数组
+        //样例添加完后生成arr=[,[0],[1],[2,3],,[4]]
+        let arr = [];
+        likeArr.forEach((e, i) => {
+            if (arr[e] == undefined) {
+                arr[e] = [];
+            }
+            arr[e].push(i);
+        })
+
+        qArr.forEach((e1, i) => {
+            let l = e1[0] - 1;
+            let r = e1[1] - 1;
+            let v = e1[2];
+            let count = 0;
+            if (arr[e1] == undefined) {
+                arr[e1] = [];
+            }
+            arr[v].forEach((e2, j) => {
+                if (e2 >= l && e2 <= r) {
+                    count++;
+                }
+            })
+            console.log(count);
+        })
+
+
+    </script>
+
+    <script>
+        // //给前面的回答添加了点注释，方便阅读
+        // let chaxunzuarr = [];
+        // //第一行输入，用户个数
+        // let yonghushu = prompt(),
+        //     //第二行输入，用户对应喜好，转化为数组
+        //     xihaoduarr = prompt().split(' '),
+        //     //第三行输入，查询组数
+        //     chaxunzushu = prompt();
+        // //循环所有查询组，4行开始的所有行
+        // for (let i = 0; i < chaxunzushu; i++) {
+        //     //取得每行值，转为数组
+        //     chaxunzuarr[i] = prompt().split(' ');
+        // }
+        // let arr = [];
+        // //遍历喜好度数组，将相同喜好度的下标添加进一个新数组
+        // //样例添加完后生成arr=[,[0],[1],[2,3],,[4]]
+        // xihaoduarr.forEach((item, index) => {
+        //     if (arr[item] == undefined) {
+        //         arr[item] = [];
+        //     }
+        //     arr[item].push(index);
+        // });
+
+        // //遍历查询组
+        // for (let j = 0; j < chaxunzushu; j++) {
+        //     //取得每行第一个数l，转化为下标-1
+        //     let start = chaxunzuarr[j][0] - 1,
+        //         //取得每行第二个数r，转化为下标-1
+        //         end = chaxunzuarr[j][1] - 1,
+        //         //取得每行第三个数k，喜好度
+        //         value = chaxunzuarr[j][2],
+        //         //初始化结果用户个数
+        //         geshu = 0;
+        //     if (arr[value] == undefined) {
+        //         //下标数组为未定义时，无喜好度
+        //         console.log(0);
+        //     } else {
+        //         //循环下标数组内元素，判断元素数组内元素是否处于标号间
+        //         arr[value].forEach(e => {
+        //             if (e >= start && e <= end) {
+        //                 geshu++;
+        //             }
+        //         })
+        //         console.log(geshu);
+        //     }
+        // }
+
+    </script>
+</body>
+
+</html>

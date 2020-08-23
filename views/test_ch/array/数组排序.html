@@ -1,0 +1,64 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-08-23 10:00:22
+ * @LastEditTime: 2020-08-23 10:21:04
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排序</title>
+</head>
+
+<body>
+    <script about='sort'>
+        // 默认字符串排序
+        var arr = ['ch', 'en', 'hao'];
+        console.log('默认字符串排序', arr.sort());
+
+        // 升序
+        arr = [15, 84, 321, 4, 81, 31, 8, 65, 321, 54, 8];
+        console.log('升序', arr.sort((a, b) => { return a - b }));
+
+        // 降序
+        console.log('降序', arr.sort((a, b) => { return b - a }));
+
+        // JSON中属性排序
+        function compare(prop) {
+            return function (a, b) {
+                if (a[prop] < b[prop]) return -1;
+                else return 1;
+            }
+        }
+        arr = [
+            { name: "ch", age: 19 },
+            { name: "cym", age: 18 },
+            { name: "bb", age: 1 },
+        ]
+        console.log('按名称排序', arr.sort(compare('name')));
+        console.log('按年龄排序', arr.sort(compare('age')));
+
+        // JSON中属性排序 指定升序or降序
+        function compare2(prop, rev = true) {
+            rev = rev ? 1 : -1;
+            return function (a, b) {
+                if (a[prop] < b[prop]) return rev * -1;
+                else return rev * 1;
+            }
+        }
+        arr = [
+            { name: "ch", age: 19 },
+            { name: "cym", age: 18 },
+            { name: "bb", age: 1 },
+        ]
+        console.log('按名称排序,默认升序', arr.sort(compare2('name')));
+        console.log('按年龄升序', arr.sort(compare2('age', true)));
+        console.log('按年龄降序', arr.sort(compare2('age', false)));
+    </script>
+</body>
+
+</html>

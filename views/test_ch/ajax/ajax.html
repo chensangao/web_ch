@@ -2,7 +2,7 @@
  * @Description: 原生js实现ajax
  * @Author: chenhao
  * @Date: 2020-07-27 13:50:45
- * @LastEditTime: 2020-07-27 17:27:16
+ * @LastEditTime: 2020-08-21 21:29:12
  * @LastEditors: chenhao
 -->
 
@@ -19,72 +19,39 @@
 </head>
 
 <body>
+    <!-- ajax -->
     <script src="ajax.js"></script>
     <script>
-        var Ajax = {
-            get: function (url, fn) {
-                // XMLHttpRequest对象用于在后台与服务器交换数据   
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', url, true);
-                xhr.onreadystatechange = function () {
-                    // readyState == 4说明请求已完成
-                    if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
-                        // 从服务器获得数据 
-                        fn.call(this, xhr.responseText);
-                    }
-                };
-                xhr.send();
-            },
-            // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
-            post: function (url, data, fn) {
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", url, true);
-                // 添加http头，发送信息至服务器时内容编码类型
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
-                        fn.call(this, xhr.responseText);
-                    }
-                };
-                xhr.send(data);
-            }
-        }
-
         //基本的使用实例
-        Ajax.get("https://ku.qingnian8.com/school/list.php")
-        // Ajax({
-        //     url: "./data.json",
-        //     type: 'GET',
-        //     dataType: 'json',
-        //     timeout: 10000,
-        //     contentType: "application/json",
-        //     success: function (data) {
-        //         console.log(data);
-        //     },
-        //     error: function (e) {
-        //         console.log(e);
-        //     }
-        // })
+        Ajax({
+            url: "https://ku.qingnian8.com/school/list.php",
+            dataType: 'json',
+            success: function (rdata) {
+                console.log('成功');
+                console.log(rdata);
+            },
+            error: function (rdata) {
+                console.log('失败');
+                console.log(rdata);
+            }
+        });
 
-        // ajax({
-        //     url: "http://server-name/login",
-        //     type: 'post',
-        //     data: {
-        //         username: 'username',
-        //         password: 'password'
-        //     },
-        //     dataType: 'json',
-        //     timeout: 10000,
-        //     contentType: "application/json",
-        //     success: function (data) {
-        //         console.log(data);
-        //     },
-        //     //异常处理
-        //     error: function (e) {
-        //         console.log(e);
-        //     }
-        // })
+        Ajax({
+            url: "https://ku.qingnian8.com/school/list.php",
+            type: 'post', data: { a: 1, b: 2 },
+            dataType: 'json',
+            success: function (rdata) {
+                console.log('成功');
+                console.log(rdata);
+            },
+            error: function (rdata) {
+                console.log('失败');
+                console.log(rdata);
+            }
+        });
+
     </script>
+
 </body>
 
 </html>

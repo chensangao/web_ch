@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="desktop">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="format-detection" content="telephone=no" />
+<title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field name='keywords'/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<script src="/skin/js/amfe-flexible.js"></script>
+<link rel="stylesheet" href="/skin/css/bootstrap.min.css">
+<link rel="stylesheet" href="/skin/css/animate.css" />
+<link rel="stylesheet" href="/skin/css/animation.css" />
+<link rel="stylesheet" href="/skin/css/common.css">
+<link rel="stylesheet" href="/skin/css/case.css">
+<link rel="stylesheet" href="/skin/css/pace-theme-barber-shop.css" />
+</head>
+<body>
+{dede:include filename="head.htm"/} 
+<!-- ========================= 内容开始 ======================== -->
+<div class="banner">
+  <picture>
+    <source srcset="/skin/images/banner-case-m.jpg" media="(max-width: 48em)">
+    <img class="img-responsive" srcset="/skin/images/banner.jpg"> </picture>
+  <div class="banner_txt">
+    <div class="DIV">
+      <div class="banner_txt1">所有经典，源于极致追求</div>
+      <div class="banner_txt2">一直向着“做业内一流的互联网设计团队”这一愿景努力，致力于不断提升对网站高端设计，微信公众号/小程序开发等产品的用户体验</div>
+    </div>
+  </div>
+</div>
+<article>
+  <section>
+    <div class="det_describe clearfix">
+      <div class="container">
+        <div class="describe_left describe_con">
+          <div class="describe_tit pull-left">【当前位置】</div>
+          <div class="describe_txt pull-left">{dede:field name='position'/}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="picview-all">
+    <div class="container">
+      <div class="picview-top letmove move">
+        <h4>{dede:field.title/}</h4>
+      </div>
+    </div>
+  </section>
+  <section class="imgs-show-all" style="margin-top: 0px;">
+    <div class="imgs-show-pc">
+      <div class="container">
+        <div class="imgs-show-one">
+          <div class="imgs-show-one-in" id="maximg"> {dede:field.body/} </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {dede:include filename="form.htm"/}
+  <div class="bg-shadow"></div>
+</article>
+<!-- ========================= 内容结束 ======================== --> 
+{dede:include filename="footer.htm"/} 
+<script src="/skin/js/jquery.min.js"></script> 
+<script src="/skin/js/bootstrap.min.js"></script> 
+<script src="/skin/js/jquery.lazyload.min.js"></script> 
+<script src="/skin/js/jquery.scrollup.min.js"></script> 
+<script src="/skin/js/wow.js"></script> 
+<script src="/skin/js/main.js"></script> 
+<script src="/skin/js/pace.js"></script> 
+<script src="/skin/js/index.js"></script> 
+<script src="/skin/js/message.js"></script> 
+<script src="/skin/js/load.js"></script> 
+<script src="/skin/js/jquery.easing.min.js"></script> 
+<script>
+	
+
+	$(document).ready(function () {
+		if ($('html').hasClass('desktop')) {
+			new WOW().init();
+		}
+
+		$(window).resize(function() {
+			$(".wechat-list .pic-box").find('.wechat-show').css('bottom','auto');
+		})
+
+		var ww = $(window).width(),
+			wh = $(window).height();
+
+		if(ww>=1200){
+			$(".wechat-list .pic-box").hover(
+				function(){
+					$(this).find(".wechat-show").css('opacity',1);
+					$(this).find(".wechat-show").stop(false,true).animate({"bottom":0},{duration:600,easing:"easeInOutQuart"});
+				},
+				function(){
+					bottom_val = $(this).find('img').height();
+					$(this).find(".wechat-show").stop(false,true).animate({"bottom":bottom_val},{duration:600});
+			});
+		}else{
+			$(".wechat-show").css('opacity',1);
+		}
+		
+	
+	});
+
+
+	
+	</script>
+</body>
+</html>

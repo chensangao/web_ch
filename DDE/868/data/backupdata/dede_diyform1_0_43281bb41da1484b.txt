@@ -1,0 +1,3 @@
+INSERT INTO `dede_diyform1` VALUES('1','0','AB模板网','13588881111','AB模板网留言测试 www.adminbuy.cn');
+INSERT INTO `dede_diyform1` VALUES('2','0','','','');
+INSERT INTO `dede_diyform1` VALUES('3','0','','','');
