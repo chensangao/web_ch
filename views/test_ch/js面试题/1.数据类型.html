@@ -1,0 +1,63 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-08-23 16:59:14
+ * @LastEditTime: 2020-08-23 17:05:13
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型</title>
+</head>
+
+<body>
+    <script>
+        /*
+        数据类型
+        基本数据类型 ：String、Number、Boolean 、Null、Undefined、Symbol、BigInt    存储在:栈
+        引用数据类型 ：Object、Function 存储在:堆
+        */
+
+        /*
+        null与undefined知识点
+        undefined值派生自null,所以相等比较null==undefined为true;
+        null是空指针但未用,有个占位符,undefined连指针都没有,也没有占位符,所以绝对比较null===undefined为false
+        */
+
+
+        /*
+        实用的判断类型方法
+        简单的判断数据类型 typeof就可以了，但是如果严格的来判断，可以使用下面的这个方法
+
+        核心代码
+
+        Object.prototype.toString.call(data)
+        使用的时候
+
+        _typeof('123')      //"string"
+        _typeof(123)        //"number"
+        _typeof(123n)       //"bigint"
+        _typeof(null)       //"null"
+        _typeof(undefined)  //"undefined"
+        _typeof({})         //"object"
+        _typeof([])         //"array"
+        _typeof(/123/)      //"regexp"
+        */
+
+        let _typeof = function (data) {
+            let value = /\[object (\w+)\]/.exec(
+                Object.prototype.toString.call(data)
+            );
+            return value ? value[1].toLowerCase() : '';
+        }
+
+        console.log(_typeof(/123/));
+        console.log(typeof (/123/));
+    </script>
+</body>
+
+</html>
