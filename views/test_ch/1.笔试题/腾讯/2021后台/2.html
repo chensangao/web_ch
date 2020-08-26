@@ -1,0 +1,35 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-08-23 19:58:57
+ * @LastEditTime: 2020-08-23 20:27:31
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var s = prompt();
+        var k = parseInt(prompt());
+        var str = [];
+        for (var i = 0; i < s.length; i++) {
+            for (var j = i + 1; j <= s.length; j++) {
+                var a = s.substring(i, j);
+                if (str.indexOf(a) == -1) {
+                    str.push(a);
+                }
+            }
+        }
+        str.sort();
+        console.log(str[k - 1])
+    </script>
+</body>
+
+</html>

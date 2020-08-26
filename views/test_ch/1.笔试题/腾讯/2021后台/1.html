@@ -1,0 +1,26 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-08-23 19:58:57
+ * @LastEditTime: 2020-08-23 20:06:59
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var [n, k] = prompt().split(' ').map(x => parseInt(x));
+        var val = prompt().split(' ').map(x => parseInt(x));
+        val.splice(k, 1);
+        console.log(val.join(' '));
+    </script>
+</body>
+
+</html>

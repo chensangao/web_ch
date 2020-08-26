@@ -1,0 +1,201 @@
+<!--
+ * @Description: 原型链
+ * @Author: chenhao
+ * @Date: 2020-07-28 13:45:11
+ * @LastEditTime: 2020-08-24 12:08:58
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型链</title>
+</head>
+
+<body>
+    <script>
+        // 一，函数对象
+        //         所有引用类型（函数，数组，对象）都拥有__proto__属性（隐式原型）
+
+        //         所有函数拥有prototype属性（显式原型）（仅限函数）
+
+        //         原型对象：拥有prototype属性的对象，在定义函数时就被创建
+
+        // 二，构造函数
+        //创建构造函数
+        function Word(words) {
+            this.words = words;
+        }
+        Word.prototype = {
+            alert() {
+                alert(this.words);
+            }
+        }
+        //创建实例
+        var w = new Word("hello world");
+        w.print = function () {
+            console.log(this.words);
+            console.log(this);  //Person对象
+        }
+        w.print();  //hello world
+        w.alert();  //hello world
+
+        // print()方法是w实例本身具有的方法，所以w.print()打印hello world；alert()不属于w实例的方法，
+        // 属于构造函数的方法，w.alert()也会打印hello world，因为实例继承构造函数的方法。
+
+        // 实例w的隐式原型指向它构造函数的显式原型，指向的意思是恒等于
+
+        // w.__proto__ === Word.prototype
+
+        // 当调用某种方法或查找某种属性时，首先会在自身调用和查找，如果自身并没有该属性或方法，
+        // 则会去它的__proto__属性中调用查找，也就是它构造函数的prototype中调用查找。
+        // 所以很好理解实例继承构造函数的方法和属性：
+
+        // w本身没有alert()方法，所以会去Word()的显式原型中调用alert()，即实例继承构造函数的方法
+
+
+        // 三，原型和原型链
+        Function.prototype.a = "a";
+        Object.prototype.b = "b";
+        function Person() { }
+        console.log(Person);    //function Person()
+        let p = new Person();
+        console.log(p);         //Person {} 对象
+        console.log(p.a);       //undefined
+        console.log(p.b);       //b
+
+        // p是Person()的实例，是一个Person对象，
+        // 它拥有一个属性值__proto__，并且__proto__是一个对象，
+        // 包含两个属性值constructor和__proto__
+
+        console.log(p.__proto__.constructor);   //function Person(){}
+        console.log(p.__proto__.__proto__);     //对象{}，拥有很多属性值
+/*
+        总结：
+        
+        1.查找属性，如果本身没有，则会去__proto__中查找，也就是构造函数的显式原型中查找，
+        如果构造函数中也没有该属性，因为构造函数也是对象，也有__proto__，那么会去它的显式原型中查找，一直到null，
+        如果没有则返回undefined
+        
+        2.p.__proto__.constructor  == function Person(){}
+        
+        3.p.___proto__.__proto__== Object.prototype
+        
+        4.p.___proto__.__proto__.__proto__== Object.prototype.__proto__ == null
+        
+        5.通过__proto__形成原型链而非protrotype
+        */
+    </script>
+
+    <script>
+        /*
+问题
+JavaScript的原型，原型链都有什么特点？
+
+参考答案
+原型对象也是普通的对象，是对象一个自带隐式的 __proto__ 属性，原型也有可能有自己的原型，
+如果一个原型对象的原型不为null的话，我们就称之为原型链
+原型链是由一些用来继承和共享属性的对象组成的（有限的）对象链
+
+详细的总结
+
+基础知识
+在JavaScript中,一共有两种类型的值,原始值和对象值.每个对象都有一个内部属性prototype,我们通常称之为原型.
+
+原型的值可以是一个对象,也可以是null.如果它的值是一个对象,则这个对象也一定有自己的原型.
+这样就形成了一条线性的链,我们称之为原型链.
+
+访问一个对象的原型可以使用Object.getPrototypeOf方法,或者__proto__属性.
+
+原型链的作用是用来实现继承,比如我们新建一个数组,数组的方法就是从数组的原型上继承而来的.
+*/
+var arr = [];
+arr.map === Array.prototype.map 
+//arr.map是从arr.__proto__上继承下来的,arr.__proto__也就是Array.prototype
+
+/*
+图形化原型链
+虽然我们都说原型链,但实际上,在不考虑网页中frame的情况,js引擎在执行期间的某一时刻,所有存在的对象组成的是一棵原型树.
+
+默认情况下,只有一棵树.根节点可以说是Object.prototype,也可以说是null.
+
+但我们可以再建立一棵原型树,通过使用Object.create方法
+*/
+var foo = Object.create(null); //foo是一个对象,但它是游离的,不属于已有的那棵原型树
+var bar = Object.create(foo); //bar的原型是foo
+var baz = Object.create(foo); //baz的原型是foo 
+/*
+这样我们有了第二棵原型树
+
+遍历原型链
+我们没有办法遍历到所有以某个对象为原型的对象,但我们可以向上遍历,获取到一个对象所有的上层原型,
+这个原型链必定是线性的,尽头是null.
+*/
+function getPrototypeChain(object) {
+  var protoChain = [];
+  while (object = object.__proto__) {
+    protoChain.push(object);
+  }
+  protoChain.push(null);
+  return protoChain;
+}
+/* 试验一下,不同的环境实现不同,显示形式也不同.下面是在chrome控制台中的显示.
+
+>getPrototypeChain(new String(""))
+[String, Object, null] //依次是String.prototype,Object.prototype,null
+>getPrototypeChain(function(){})
+[function Empty() {}, Object, null] //依次是Function.prototype,Object.prototype,null
+// 内置类型的对象的原型链并不长,下面试试宿主对象.
+
+>getPrototypeChain(document.createElement("div"))
+[HTMLDivElement, HTMLElement, Element, Node, Object, null]
+// 这个就长多了.
+
+
+超长原型链
+
+可以看出来,我们平时使用的对象并没有很长的原型链.但可以自己构造一个.
+*/
+function Foo() {}
+for (var i = 0; i < 100; i++) {
+Foo.prototype["foo" + i] = i;
+Foo.prototype = new Foo;
+}
+console.dir(getPrototypeChain(new Foo));
+/*最后的这个new Foo有多少个上层原型呢?
+
+经典的总结
+每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，
+
+如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，
+
+于是就这样一直找下去，也就是我们平时所说的原型链的概念。
+
+关系
+instance.constructor.prototype = instance.__proto__
+特点
+JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。
+
+当我们修改原型时，与之相关的对象也会继承这一改变。
+
+当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性， 如果没有的话，
+
+就会查找他的prototype对象是否有这个属性，如此递推下去，一直检索到 Object 内建对象。
+*/
+function Func () { }
+Func.prototype.name = "Sean";
+Func.prototype.getInfo = function () {
+  return this.name;
+}
+var person = new Func();//现在可以参考var person = Object.create(oldObject);
+console.log(person.getInfo());//它拥有了Func的属性和方法
+//"Sean"
+console.log(Func.prototype);
+// Func { name="Sean", getInfo=function()}
+        
+    </script>
+</body>
+
+</html>

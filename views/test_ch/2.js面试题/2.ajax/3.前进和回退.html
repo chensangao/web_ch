@@ -1,0 +1,176 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-08-24 11:07:10
+ * @LastEditTime: 2020-08-24 11:07:29
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前进和回退</title>
+</head>
+
+<body>
+    <script>
+        /*
+问题
+实现一个页面操作不会整页刷新的网站，并且能在浏览器前进、后退时正确响应。给出你的技术实现方案？
+
+答案
+相较于不同页面的跳转，AJAX可以说大大提高了用户的浏览体验，不用看到页面切换之间的白屏是件很惬意的事情。但是很多早先的AJAX应用是不支持浏览器的前进后退的，这导致了用户不管在网站里浏览到何处，一旦刷新就会立刻回到起初的位置，并且用户也无法通过浏览器的前进后退按钮来实现浏览历史的切换。
+
+对于第一个问题，解决还算容易，只要用cookie或者localStorage来记录应用的状态即可，刷新页面时读取一下这个状态，然后发送相应ajax请求来改变页面即可。但是第二个问题就很麻烦了，先说下现代浏览器的解决方案。
+
+HTML5 解决方案
+要了解HTML5如何实现前进后退，就要先了解下history对象和location对象。
+
+history对象
+History 对象属性
+
+length：返回浏览器历史列表中的URL数量，用户在当前标签每访问一个页面，此数量加1。因为隐私原因，URL具体内容不可见。
+
+state：与当前网址相关的对象，只能通过pushState和replaceState添加或修改。我们可以可以用它来存储跟url有关的信息。
+
+History 对象方法
+history.back()
+此方法无参数，触发后会返回前一个浏览的页面，相当于点击了浏览器的后退按钮。
+
+history.forward()
+此方法无参数，触发后会返回后退前浏览的页面，相当于点击了浏览器的前进按钮。
+
+history.go(number)
+此方法接受一个整形变量参数，history.go(-1)相当于后退一页，history.go(1)相当于前进一页，history.go(0)会刷新当前页面。
+
+history.pushState(state, title, url)
+改变url且不刷新页面的关键就是它了，此方法会改变当前页面的location.href并且修改当前的history.state对象，执行后history.length会增加1。此方法接受三个参数，
+
+state：当前网址相关的对象。
+
+title：页面标题，但是所有浏览器都忽略它，要改变标题还是要用document.title。
+
+url：一个与当前页面同域的网址，location.href会变成此值。
+
+history.replaceState(state, title, url)
+
+此方法同上，但是它不会改变history.length，只会修改当history.state和location.href。
+
+注意 pushState 和 replaceState 第三个参数不可跨域，并且不会触发浏览器的popstate事件和onhashchange事件(chrome33下测试)。
+
+location对象
+除了点击前进/后退按钮和history事件，还可以通过location的方法和修改location的属性来改变Url：
+
+location对象的属性(读写)：
+
+host:域名+端口号
+
+hostname:域名
+
+port:端口号
+
+protocol:协议
+
+href：完整路径
+
+origin：协议+域名+端口
+
+hash：井号 (#) 开始的 URL(hash)
+
+pathname:文档路径+文档名
+
+search:(?)后面的内容
+
+可以通过改变location.href或location.hash来达到无刷新的目的。
+
+location对象的方法：
+
+assign:改变url的值，并且将当前的url添加到历史记录中history.length会增加1。location.assig(‘#’ + x)会改变url但是不刷新页面。
+
+reload:刷新页面。
+
+replace:改变url的值，但是history.length不变。使用方法同assign。
+
+popstate事件
+当url改变时，比如用户点击前进/后退按钮，history.go(n)（n不等于0）,location.hash = x(x不等于当前的location.hash)都会触发此事件。可以用它来监听url，来实现各种功能。
+
+代码如下:
+
+window.onpopstate = function(){
+//do sth
+}
+onhashchange事件
+改变hash值会触发popstate事件，而触发popstate事件不一定会触发onhashchange事件。经过测试：
+
+hash改变但是location.pathname不变会触发onhashchange事件，比如history.pushState(”, ”, ‘#abc');
+
+hash和location.pathname一起改变则不触发，比如history.pushState(”, ”, ‘a#abc’);
+
+老旧浏览器的写法
+
+老旧浏览器也不支持pushState和replaceState，所以通过popstate(事实上也不支持这个方法)监听url变化的路走不通。
+
+那么只能通过改变url#后面的内容来达到无刷新，但是它们又不支持onhashchange，所以对url的变化是无动于衷的(除了页面会滚动至页面对应id的位置)。那么只能祭出大招：轮询，起一个setInterval来监听url的值。Like this:
+
+代码如下:
+
+var prevHash = window.location.hash;
+var callback = function(){
+  //...
+}
+window.setInterval(function() {
+    if (window.location.hash != prevHash) {
+        prevHash = window.location.hash;
+        callback(prevHash);
+    }
+}, 100);
+当然这样写非常非常挫，如果不考虑点击页面带有id的a标签来改变hash的情况，可以利用设计模式来优雅的实现监听url。比如经典的观察者模式，专门用一个类来实现改变hash的功能，然后所有要监听url变化的类(观察者)去订阅这个(被观察者)类。
+
+代码如下:
+
+//改变url的类
+function UrlChanger () {
+  var _this = this;
+  this.observers = [];
+  //添加观察者
+  this.addObserver = function (obj) {
+    //...
+  }
+  //删除观察者
+  this.deleteObserver = function (obj) {
+    //...
+  }
+  //通知观察者
+  this._notifyObservers = function () {
+    var length = _this.observers.length;
+    console.log(length)
+    for (var i = 0; i < length; i++) {
+      _this.observers[i].update();
+    }
+  }
+  //改变url
+  this.changeUrl = function (hash) {
+    window.location.hash = hash;
+    _this._notifyObservers();
+  }
+}
+//监听类
+function oneOfObservers () {
+  var _this = this;
+  this.update = function () {
+    //...
+  }
+}
+//实现
+var o1 = new UrlChanger();
+var o2 = new oneOfObservers();
+o1.addObserver(o2);
+o1.changeUrl('fun/arg1/arg2/');
+//o2 has do sth...
+        */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!--
+ * @Description: 
+ * @Author: chenhao
+ * @Date: 2020-08-23 19:58:57
+ * @LastEditTime: 2020-08-23 20:50:44
+ * @LastEditors: chenhao
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var n = parseInt(prompt());
+        // var num = [];
+        // for (let i = 0; i < n; i++) {
+        //     var num = parseInt(prompt());
+        //     var a = Math.ceil(num / 2);
+        //     var b = num - a;
+        //     var a_str = '' + a;
+        //     var b_str = '' + b;
+        //     var sum = 0;
+        //     for (var i = 0; i < a_str.length; i++) {
+        //         sum += parseInt(a_str[i]);
+        //     }
+        //     for (var i = 0; i < b_str.length; i++) {
+        //         sum += parseInt(b_str[i]);
+        //     }
+        //     console.log(sum);
+        // }
+    </script>
+
+    <script>
+        var n = parseInt(prompt());
+        var num = [];
+        for (let i = 0; i < n; i++) {
+            var num = prompt();
+            if (num.length == 1) {
+                console.log(parseInt(num));
+            }
+            else if (num.length == 2) {
+                var shi = parseInt(num[0]);
+                var ge = parseInt(num[1]);
+                console.log(shi + ge + 9);
+            }
+            else if (num.length === 3) {
+                var bai = parseInt(num[0]);
+                var shi = parseInt(num[1]);
+                var ge = parseInt(num[2]);
+                console.log(bai + shi + ge + 99);
+            }
+        }
+    </script>
+</body>
+
+</html>

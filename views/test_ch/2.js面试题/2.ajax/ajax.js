@@ -2,7 +2,7 @@
  * @Description: 原生js实现ajax
  * @Author: chenhao
  * @Date: 2020-07-27 17:05:16
- * @LastEditTime: 2020-08-21 21:34:07
+ * @LastEditTime: 2020-08-24 10:56:41
  * @LastEditors: chenhao
  */
 
@@ -44,12 +44,27 @@ function Ajax(options) {
 
     //接受
     xhr.onreadystatechange = function () {
-        // readyState : 0初始化 1已连接 2已发送 3已接收头 4已接收体(请求已完成)
-        // status: 1xx 消息
-        // 2xx 成功
-        // 3xx 重定向   301永久重定向 302临时重定向 304缓存
-        // 4xx 请求错误(客户端) 404
-        // 5xx 服务端错误 503服务不可用(维护)
+        /*
+        readyState : 0初始化 1已连接 2已发送 3已接收头 4已接收体(请求已完成)
+        status: 
+        1xx 消息 
+            100 Continue 继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，
+                表示确认，之后发送具体参数信息
+        2xx 成功
+            201 Created 请求成功并且服务器创建了新的资源
+            202 Accepted 服务器已接受请求，但尚未处理
+        3xx 重定向   
+            301 Moved Permanently 请求的网页已永久移动到新位置。
+            302 Found 临时性重定向。
+            303 See Other 临时性重定向，且总是使用 GET 请求新的 URI。
+            304 Not Modified 自从上次请求后，请求的网页未修改过。
+        4xx 请求错误(客户端) 
+            400 Bad Request 服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。
+            401 Unauthorized 请求未授权。
+            403 Forbidden 禁止访问。
+            404 Not Found 找不到如何与 URI 相匹配的资源。
+        5xx 服务端错误 503服务不可用(过载维护)
+        */
         if (xhr.readyState == 4) {
             if (xhr.status == 200 || xhr.status == 304) {
                 let rdata = xhr.responseText;
